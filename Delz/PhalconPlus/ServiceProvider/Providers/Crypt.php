@@ -40,4 +40,12 @@ class Crypt extends Provider
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '加密';
+    }
+
 }

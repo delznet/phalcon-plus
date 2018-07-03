@@ -31,4 +31,11 @@ interface IProvider
      * @param string $name
      */
     public function setName(string $name);
+
+    /**
+     * 获取服务描述
+     *
+     * @return string
+     */
+    public function getDescription();
 }

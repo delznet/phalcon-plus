@@ -45,4 +45,12 @@ class ModelsManager extends Provider
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '模型管理器';
+    }
+
 }

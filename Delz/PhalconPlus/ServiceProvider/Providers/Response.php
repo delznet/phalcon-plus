@@ -33,4 +33,12 @@ class Response extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return 'Response';
+    }
 }

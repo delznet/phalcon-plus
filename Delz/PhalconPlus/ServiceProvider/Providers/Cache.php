@@ -185,4 +185,12 @@ class Cache extends Provider
             ]
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '缓存';
+    }
 }

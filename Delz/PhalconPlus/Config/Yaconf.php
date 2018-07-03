@@ -38,7 +38,7 @@ class Yaconf implements IConfig
     /**
      * {@inheritdoc}
      */
-    public function get(string $key = null, $default = null)
+    public function get($key = null, $default = null)
     {
         if ($key === null) {
             return \Yaconf::get($this->namespace);

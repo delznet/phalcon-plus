@@ -34,4 +34,12 @@ class Request extends Provider
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return 'Request';
+    }
+
 }

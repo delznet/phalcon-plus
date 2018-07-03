@@ -36,4 +36,12 @@ class Dispatcher extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '调度控制器';
+    }
 }

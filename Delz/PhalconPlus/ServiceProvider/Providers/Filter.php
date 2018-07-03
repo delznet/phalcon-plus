@@ -54,7 +54,7 @@ class Filter extends Provider
             $this->serviceName,
             function () use ($self) {
                 /** @var IConfig $config */
-                $config = $this->di->getShared('config');
+                $config = $self->di->getShared('config');
                 $filter = new PhalconFilter();
                 //加载自定义filter
                 $userFilters = $config->get('filters');
@@ -77,5 +77,13 @@ class Filter extends Provider
                 return $filter;
             }
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '过滤器';
     }
 }

@@ -28,12 +28,24 @@ class PhpTemplateEngine extends Provider
      */
     public function register()
     {
+        $self = $this;
         $this->di->setShared(
             $this->serviceName,
-            function (ViewBaseInterface $view, DiInterface $di = null) {
+            function (ViewBaseInterface $view = null, DiInterface $di = null) use ($self) {
+                if (is_null($view)) {
+                    $view = $self->di->get('view');
+                }
                 $engine = new PhpEngine($view, $di);
                 return $engine;
             }
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return 'php模板引擎';
     }
 }

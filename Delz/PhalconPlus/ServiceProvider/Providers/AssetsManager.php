@@ -38,11 +38,19 @@ class AssetsManager extends Provider
                 $app = $self->di->getShared('app');
                 return new Manager([
                     'sourceBasePath' => $app->getRootDir() . $config->get('assets.source_base_path', DIRECTORY_SEPARATOR . 'resources/assets' . DIRECTORY_SEPARATOR),
-                    'targetBasePath' => $app->getRootDir() . $config->get('assets.target_base_path', '/public'),
+                    'targetBasePath' => $app->getRootDir() . $config->get('assets.target_base_path', '/public' . DIRECTORY_SEPARATOR),
                     'configFilePath' => $app->getRootDir() . $config->get('assets.config_file_path', '/resources/config/assets.yml')
                 ]);
             }
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '资源文件管理';
     }
 
 }

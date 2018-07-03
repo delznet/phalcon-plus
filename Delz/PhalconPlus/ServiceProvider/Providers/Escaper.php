@@ -33,4 +33,12 @@ class Escaper extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '上下文编码转义';
+    }
 }

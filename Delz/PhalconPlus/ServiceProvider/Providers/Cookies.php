@@ -35,4 +35,12 @@ class Cookies extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return 'Cookie';
+    }
 }

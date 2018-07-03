@@ -44,7 +44,7 @@ interface IConfig
      * @param null|mixed $default 如果$key不存在，返回的默认$default值
      * @return mixed 返回参数值
      */
-    public function get(string $key = null, $default = null);
+    public function get($key = null, $default = null);
 
     /**
      * 判断键值$key是否存在

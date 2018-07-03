@@ -45,4 +45,14 @@ class Annotations extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '注释解析器';
+    }
+
+
 }

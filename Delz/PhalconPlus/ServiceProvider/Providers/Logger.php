@@ -120,4 +120,12 @@ class Logger extends Provider
             "facility" => LOG_USER
         ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '日志';
+    }
 }

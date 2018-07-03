@@ -48,4 +48,12 @@ class ModelsMetaData extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '模型元数据';
+    }
 }

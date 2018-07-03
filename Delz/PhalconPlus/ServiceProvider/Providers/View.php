@@ -45,4 +45,12 @@ class View extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '视图';
+    }
 }

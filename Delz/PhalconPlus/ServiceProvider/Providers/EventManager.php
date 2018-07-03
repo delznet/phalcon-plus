@@ -36,4 +36,12 @@ class EventManager extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '事件管理';
+    }
 }

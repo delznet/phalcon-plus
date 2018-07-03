@@ -94,4 +94,12 @@ class Random extends Provider
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '随机数生成';
+    }
+
 }

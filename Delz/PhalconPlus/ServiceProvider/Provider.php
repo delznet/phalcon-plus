@@ -49,5 +49,13 @@ abstract class Provider implements IProvider
         $this->serviceName = $name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '';
+    }
+
 
 }

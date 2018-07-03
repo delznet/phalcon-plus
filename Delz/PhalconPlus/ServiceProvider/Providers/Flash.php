@@ -33,4 +33,12 @@ class Flash extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '闪存消息';
+    }
 }

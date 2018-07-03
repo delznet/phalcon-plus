@@ -140,4 +140,12 @@ class Db extends Provider
         }
         return $parameters;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '数据库';
+    }
 }

@@ -44,4 +44,12 @@ class Url extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '网址';
+    }
 }

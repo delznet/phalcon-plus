@@ -64,4 +64,12 @@ class RouterAnnotations extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '注解路由';
+    }
 }

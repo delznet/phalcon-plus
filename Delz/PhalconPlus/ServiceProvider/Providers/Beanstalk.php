@@ -42,4 +42,12 @@ class Beanstalk extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return 'beanstalk队列';
+    }
 }

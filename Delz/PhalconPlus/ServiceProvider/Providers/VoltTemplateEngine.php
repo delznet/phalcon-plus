@@ -4,14 +4,12 @@ declare(strict_types = 1);
 
 namespace Delz\PhalconPlus\ServiceProvider\Providers;
 
-use Delz\PhalconPlus\Mvc\View\Volt\ExtensionManager;
 use Delz\PhalconPlus\ServiceProvider\Provider;
 use Phalcon\DiInterface;
 use Delz\PhalconPlus\Mvc\View\Engine\Volt;
 use Phalcon\Mvc\ViewBaseInterface;
 use Delz\PhalconPlus\App\IApp;
 use Delz\PhalconPlus\Config\IConfig;
-use Phalcon\Mvc\View\Engine\Volt\Compiler;
 
 /**
  * volt模板引擎
@@ -35,7 +33,10 @@ class VoltTemplateEngine extends Provider
         $self = $this;
         $this->di->setShared(
             $this->serviceName,
-            function (ViewBaseInterface $view, DiInterface $di = null) use ($self) {
+            function (ViewBaseInterface $view = null, DiInterface $di = null) use ($self) {
+                if(is_null($view)) {
+                    $view = $self->di->get('view');
+                }
                 /** @var IApp $app */
                 $app = $self->di->getShared('app');
                 /** @var IConfig $config */
@@ -55,5 +56,13 @@ class VoltTemplateEngine extends Provider
                 return $volt;
             }
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return 'volt模板引擎';
     }
 }

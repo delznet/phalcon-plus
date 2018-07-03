@@ -46,7 +46,7 @@ class Config implements IConfig
     /**
      * {@inheritdoc}
      */
-    public function get(string $key = null, $default = null)
+    public function get($key = null, $default = null)
     {
         if ($key === null) {
             return $this->map;
@@ -80,7 +80,7 @@ class Config implements IConfig
     /**
      * {@inheritdoc}
      */
-    public function has(string $key)
+    public function has(string $key):bool
     {
         if (isset($this->resolved[$key])) {
             if ($this->resolved[$key]['found']) {

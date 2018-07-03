@@ -170,4 +170,12 @@ class Session extends Provider
         ];
         return new RedisSession($options);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return 'Session';
+    }
 }

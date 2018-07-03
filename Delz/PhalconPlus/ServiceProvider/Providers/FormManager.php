@@ -31,4 +31,12 @@ class FormManager extends Provider
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return '表单管理器';
+    }
 }

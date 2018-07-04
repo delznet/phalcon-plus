@@ -204,7 +204,7 @@ abstract class App implements IApp
      *
      * config是核心服务，固定了使用Yaconf
      */
-    protected function initConfigService():void
+    protected function initConfigService()
     {
         $configService = new Yaconf($this->appId);
         $this->di->setShared('config', $configService);

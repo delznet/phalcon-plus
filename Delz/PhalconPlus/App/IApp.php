@@ -16,7 +16,7 @@ interface IApp
     /**
      * 运行应用
      */
-    public function run():void;
+    public function run();
 
     /**
      * 获取容器

@@ -17,7 +17,7 @@ class HproseHttpApp extends App
     /**
      * {@inheritdoc}
      */
-    public function run():void
+    public function run()
     {
         if (!$this->appId) {
             throw new AppIdNullException();

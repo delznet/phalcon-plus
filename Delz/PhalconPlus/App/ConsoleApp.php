@@ -38,7 +38,7 @@ class ConsoleApp extends App
     /**
      * {@inheritdoc}
      */
-    public function run():void
+    public function run()
     {
         $commandOutput = new Stream();
         $commandInput = new ArgvInput();

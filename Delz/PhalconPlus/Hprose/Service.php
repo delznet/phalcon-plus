@@ -28,6 +28,13 @@ class Service extends \Hprose\Http\Service implements InjectionAwareInterface
     protected $di;
 
     /**
+     * 服务分组名
+     *
+     * @var string
+     */
+    protected $group = 'rpc-services';
+
+    /**
      * 重写构造函数，加入服务容器注入
      *
      * @param DiInterface $di
@@ -56,6 +63,24 @@ class Service extends \Hprose\Http\Service implements InjectionAwareInterface
     }
 
     /**
+     * @return string
+     */
+    public function getGroup():string
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param string $group
+     */
+    public function setGroup(string $group)
+    {
+        $this->group = $group;
+    }
+
+
+
+    /**
      * 重写方法，加入配置rpc判断，如果配置文件存在，直接调用rpc service provider，然后注册
      *
      * @param BytesIO $stream
@@ -71,11 +96,11 @@ class Service extends \Hprose\Http\Service implements InjectionAwareInterface
             $reader->reset();
             $name = $reader->readString();
             $alias = strtolower($name);
-            if(!isset($this->calls[$alias])) {
+            if (!isset($this->calls[$alias])) {
                 //获取config服务
                 /** @var IConfig $configService */
                 $configService = $this->di->get('config');
-                $rpcServiceKey = 'rpc-services.' . $name;
+                $rpcServiceKey = $this->group . '.' . $name;
                 if ($configService->has($rpcServiceKey)) {
                     $rpcServiceProviderClass = $configService->get($rpcServiceKey);
                     if (class_exists($rpcServiceProviderClass)) {
@@ -179,7 +204,7 @@ class Service extends \Hprose\Http\Service implements InjectionAwareInterface
     public function writeResponse($data, $context)
     {
         $context->response->setContent($data);
-        $context->response->send();
+        //$context->response->send();
     }
 
     /**

@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Delz\PhalconPlus\ServiceProvider\Providers;
 
 use Delz\PhalconPlus\ServiceProvider\Provider;
-use Phalcon\Mvc\Router\Annotations as PhalconRouterAnnotations;
+use Delz\PhalconPlus\Mvc\Router\Annotations as PhalconRouterAnnotations;
 use Delz\PhalconPlus\Config\IConfig;
 use Delz\PhalconPlus\App\IApp;
 
@@ -54,7 +54,6 @@ class RouterAnnotations extends Provider
                 //添加注解路由
                 $routers = $config->get('router.' . $app->getModule() . '.annotations');
                 if ($routers && is_array($routers)) {
-                    //@todo 如果handler包含路径？
                     foreach ($routers as $handler => $prefix) {
                         $router->addResource($handler, $prefix);
                     }

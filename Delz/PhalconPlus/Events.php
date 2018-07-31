@@ -20,6 +20,10 @@ final class Events
      */
     const APPLICATION_TERMINATE = 'application:terminate';
     /**
+     * 捕捉应用异常事件
+     */
+    const APPLICATION_EXCEPTION = 'application:exception';
+    /**
      * 在执行分发环前
      */
     const APPLICATION_BEFORE_HANDLE_REQUEST = 'application:beforeHandleRequest';
@@ -29,7 +33,7 @@ final class Events
     const APPLICATION_AFTER_HANDLE_REQUEST = 'application:afterHandleRequest';
     const DISPATCH_BEFORE_DISPATCH_LOOP = 'dispatch:beforeDispatchLoop';
     const DISPATCH_BEFORE_DISPATCH = 'dispatch:beforeDispatch';
-    const DISPATCHER_BEFORE_EXECUTE_ROUTE = 'dispatcher:beforeExecuteRoute';
+    const DISPATCH_BEFORE_EXECUTE_ROUTE = 'dispatch:beforeExecuteRoute';
     const DISPATCH_AFTER_INITIALIZE = 'dispatch:afterInitialize';
     const DISPATCH_AFTER_BINDING = 'dispatch:afterBinding';
     const DISPATCH_AFTER_EXECUTE_ROUTE = 'dispatch:afterExecuteRoute';

@@ -57,14 +57,18 @@ class WebApp extends App
         $response = null;
         try {
             $response = $this->getApplication()->handle();
-        } catch (ApiException $e) {
+        } catch (\Exception $e) {
             $ex = $e;
         }
-        $apiResult = new ApiResult();
         /** @var DispatcherInterface $dispatcher */
         $dispatcher = $this->di->get('dispatcher');
         $activeController = $dispatcher->getActiveController();
-        if ($activeController && $activeController instanceof JsonController) {
+        $controllerClass = $dispatcher->getControllerClass();
+        $parentClass = get_parent_class($controllerClass);
+        if ($parentClass == 'Delz\PhalconPlus\Mvc\Controller\JsonController'
+            || ($activeController && $activeController instanceof JsonController)
+        ) {
+            $apiResult = new ApiResult();
             if ($ex) {
                 $response = new Response();
                 $apiResult->setRet($ex->getCode());
@@ -79,7 +83,8 @@ class WebApp extends App
             $response->setJsonContent($apiResult);
         } else {
             if ($ex) {
-                throw $ex;
+                echo sprintf('Error: %s', $ex->getMessage());
+                return;
             }
         }
 

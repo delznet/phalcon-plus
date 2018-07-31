@@ -6,6 +6,7 @@ namespace Delz\PhalconPlus\EventListener;
 
 use Delz\PhalconPlus\Event\EventListener;
 use Phalcon\Events\Event;
+use Phalcon\Http\Response;
 
 /**
  * 监听Delz\PhalconPlus\Event::APPLICATION_EXCEPTION事件
@@ -17,11 +18,12 @@ class ExceptionListener extends EventListener
     /**
      * @param Event $event
      * @param \Exception $e
-     * @param string $module
-     * @throws $e
      */
-    public function onException(Event $event, \Exception $e, string $module = '')
+    public function onException(Event $event, \Exception $e)
     {
-        throw $e;
+        $content = sprintf('Error:[%d] %s', $e->getCode(), $e->getMessage());
+        $response = new Response();
+        $response->setContent($content);
+        $response->send();
     }
 }

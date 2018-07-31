@@ -74,7 +74,7 @@ class WebApp extends App
             }
             $response->send();
         } catch (\Exception $e) {
-            $this->di->get('eventsManager')->fire(Events::APPLICATION_EXCEPTION, $e, $this->getModule());
+            $this->di->get('eventsManager')->fire(Events::APPLICATION_EXCEPTION, $e);
         }
     }
 

@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 
 namespace Delz\PhalconPlus\Security\Exception;
+use Delz\PhalconPlus\Exception\InternalServerErrorException;
 
 /**
  * token对象异常
@@ -12,10 +13,10 @@ namespace Delz\PhalconPlus\Security\Exception;
  *
  * @package Delz\PhalconPlus\Security\Exception
  */
-class UnsupportedTokenException extends AuthenticationException
+class UnsupportedTokenException extends InternalServerErrorException implements IAuthenticationException
 {
-    public function __construct($message = 'Unsupported Token.')
+    public function __construct($message = 'Unsupported Token', $code = Exceptions::UNSUPPORTED_TOKEN)
     {
-        parent::__construct($message);
+        parent::__construct($message, $code);
     }
 }

@@ -5,11 +5,13 @@ declare(strict_types = 1);
 namespace Delz\PhalconPlus\Security\Exception;
 
 /**
- * 鉴权异常
+ * 认证空接口
+ *
+ * 目的是为了给异常分类
  *
  * @package Delz\PhalconPlus\Security\Exception
  */
-class AuthenticationException extends \RuntimeException
+interface IAuthenticationException
 {
 
 }

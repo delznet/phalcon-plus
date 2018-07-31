@@ -6,11 +6,11 @@ namespace Delz\PhalconPlus\Exception;
 
 
 /**
- * api接口客户端非法请求异常
+ * 客户端非法请求异常
  *
  * @package Delz\PhalconPlus\Exception
  */
-class ApiBadRequestException extends ApiException
+class BadRequestException extends \RuntimeException
 {
     /**
      * 客户端非法请求错误，都是4开头的

@@ -4,13 +4,12 @@ declare(strict_types = 1);
 
 namespace Delz\PhalconPlus\App;
 
+use Delz\PhalconPlus\Events;
 use Delz\PhalconPlus\Exception\AppIdNullException;
 use Delz\PhalconPlus\Mvc\ApiResult;
 use Delz\PhalconPlus\Mvc\Controller\JsonController;
 use Phalcon\Mvc\DispatcherInterface;
 use Phalcon\Mvc\Application;
-use Phalcon\Http\Response;
-use Delz\PhalconPlus\Exception\ApiException;
 
 /**
  * web应用
@@ -57,38 +56,26 @@ class WebApp extends App
         $response = null;
         try {
             $response = $this->getApplication()->handle();
-        } catch (\Exception $e) {
-            $ex = $e;
-        }
-        /** @var DispatcherInterface $dispatcher */
-        $dispatcher = $this->di->get('dispatcher');
-        $activeController = $dispatcher->getActiveController();
-        $controllerClass = $dispatcher->getControllerClass();
-        $parentClass = get_parent_class($controllerClass);
-        if ($parentClass == 'Delz\PhalconPlus\Mvc\Controller\JsonController'
-            || ($activeController && $activeController instanceof JsonController)
-        ) {
-            $apiResult = new ApiResult();
-            if ($ex) {
-                $response = new Response();
-                $apiResult->setRet($ex->getCode());
-                $apiResult->setMsg($ex->getMessage());
-            } else {
+            /** @var DispatcherInterface $dispatcher */
+            $dispatcher = $this->di->get('dispatcher');
+            $activeController = $dispatcher->getActiveController();
+            $controllerClass = $dispatcher->getControllerClass();
+            $parentClass = get_parent_class($controllerClass);
+            if ($parentClass == 'Delz\PhalconPlus\Mvc\Controller\JsonController'
+                || ($activeController && $activeController instanceof JsonController)
+            ) {
+                $apiResult = new ApiResult();
                 $apiResult->setMsg('OK');
                 $apiResult->setData($dispatcher->getReturnedValue());
+                $response->setHeader('Access-Control-Allow-Origin', '*');
+                $response->setHeader('Access-Control-Allow-Methods', 'POST');
+                $response->setHeader('Access-Control-Allow-Headers', 'x-requested-with,content-type');
+                $response->setJsonContent($apiResult);
             }
-            $response->setHeader('Access-Control-Allow-Origin', '*');
-            $response->setHeader('Access-Control-Allow-Methods', 'POST');
-            $response->setHeader('Access-Control-Allow-Headers', 'x-requested-with,content-type');
-            $response->setJsonContent($apiResult);
-        } else {
-            if ($ex) {
-                echo sprintf('Error: %s', $ex->getMessage());
-                return;
-            }
+            $response->send();
+        } catch (\Exception $e) {
+            $this->di->get('eventsManager')->fire(Events::APPLICATION_EXCEPTION, $e, $this->getModule());
         }
-
-        $response->send();
     }
 
     /**

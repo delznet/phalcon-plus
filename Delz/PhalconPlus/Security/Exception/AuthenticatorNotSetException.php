@@ -2,7 +2,7 @@
 
 namespace Delz\PhalconPlus\Security\Exception;
 
-use Exception;
+use Delz\PhalconPlus\Exception\InternalServerErrorException;
 
 /**
  *
@@ -10,11 +10,11 @@ use Exception;
  *
  * @package Delz\PhalconPlus\Security\Exception
  */
-class AuthenticatorNotSetException extends AuthenticationException
+class AuthenticatorNotSetException extends InternalServerErrorException implements IAuthenticationException
 {
-    public function __construct($message = 'Authenticator is not set.')
+    public function __construct($message = 'Authenticator is not set.', $code = Exceptions::AUTHENTICATOR_NOT_SET)
     {
-        parent::__construct($message);
+        parent::__construct($message, $code);
     }
 
 }

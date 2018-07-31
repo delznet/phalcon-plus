@@ -22,7 +22,7 @@ final class Events
     /**
      * 捕捉应用异常事件
      */
-    const APPLICATION_EXCEPTION = 'application:exception';
+    const APPLICATION_EXCEPTION = 'application:onException';
     /**
      * 在执行分发环前
      */

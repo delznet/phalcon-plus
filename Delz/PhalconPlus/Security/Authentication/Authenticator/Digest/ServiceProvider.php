@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Delz\PhalconPlus\Security\Authentication\Authenticator\Digest;
 
-use Delz\PhalconPlus\Security\Authentication\TokenStorage;
 use Delz\PhalconPlus\ServiceProvider\Provider;
 use Delz\PhalconPlus\Config\IConfig;
 use Delz\PhalconPlus\Security\Authentication\Authenticator\Digest\Authenticator as DigestAuthenticator;

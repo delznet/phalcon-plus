@@ -60,6 +60,6 @@ class QueryBuilder implements IPagerAdapter
         $this->totalBuilder->orderBy(null);
         $query = $this->totalBuilder->getQuery();
         $row = $query->execute()->getFirst();
-        return $row ? $row->rowcount : 0;
+        return $row ? (int)$row->rowcount : 0;
     }
 }

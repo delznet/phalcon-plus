@@ -8,6 +8,8 @@ use Delz\PhalconPlus\ServiceProvider\Provider;
 use Phalcon\Mvc\Model\MetaData\Apc as ApcMetaData;
 use Delz\PhalconPlus\Config\IConfig;
 use Delz\PhalconPlus\App\IApp;
+use Phalcon\Mvc\Model\MetaData\Strategy\Introspection;
+use Phalcon\Mvc\Model\MetaData\Strategy\Annotations;
 
 /**
  * 模型元数据服务
@@ -44,6 +46,23 @@ class ModelsMetaData extends Provider
                     "lifetime" => $lifetime,
                     'prefix' => $prefix
                 ]);
+
+                $strategy = strtolower($config->get('model.metadata.strategy', 'introspection'));
+
+                switch ($strategy) {
+                    case 'introspection':
+                        $strategyObj = new Introspection();
+                        break;
+                    case 'annotations':
+                        $strategyObj = new Annotations();
+                        break;
+                    default:
+                        $strategyObj = new Introspection();
+                        break;
+                }
+
+                $metadata->setStrategy($strategyObj);
+
                 return $metadata;
             }
         );

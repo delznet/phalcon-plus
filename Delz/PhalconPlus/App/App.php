@@ -55,7 +55,7 @@ abstract class App implements IApp
      * App constructor.
      * @param string $appId 应用Id，支持字母、数字以及字符串-和_
      */
-    public function __construct(string $appId = null)
+    public function __construct(string $appId)
     {
         if ($appId) {
             $this->setAppId($appId);

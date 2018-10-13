@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Delz\PhalconPlus\ServiceProvider\Providers;
 
@@ -61,7 +61,7 @@ class Db extends Provider
      *
      * @return Mysql
      */
-    private function createMysqlService():Mysql
+    private function createMysqlService(): Mysql
     {
         $connection = new Mysql($this->resolveMysqlOrPostgresqlParameters());
 
@@ -73,7 +73,7 @@ class Db extends Provider
      *
      * @return Postgresql
      */
-    private function createPostgresqlService():Postgresql
+    private function createPostgresqlService(): Postgresql
     {
         $connection = new Postgresql($this->resolveMysqlOrPostgresqlParameters());
 
@@ -98,7 +98,8 @@ class Db extends Provider
                 'dbname' => '',
                 'username' => '',
                 'password' => '',
-                'port' => ''
+                'port' => '',
+                'charset' => 'UTF8'
             ];
             $parameters = array_intersect_key($config->get($this->getName()), $normalParameters);
 
@@ -135,9 +136,15 @@ class Db extends Provider
         }
         if (!Validator::port($parameters['port'])) {
             throw new \InvalidArgumentException(
-                sprintf('invalid memcache port: %s', $port)
+                sprintf('invalid memcache port: %s', $parameters['port'])
             );
         }
+        //设置编码
+        if (!isset($parameters['charset'])) {
+            $parameters['charset'] = 'UTF8';
+        }
+        $parameters['options'][\PDO::MYSQL_ATTR_INIT_COMMAND] = sprintf('SET NAMES \'%s\'', $parameters['charset']);
+        unset($parameters['charset']);
         return $parameters;
     }
 

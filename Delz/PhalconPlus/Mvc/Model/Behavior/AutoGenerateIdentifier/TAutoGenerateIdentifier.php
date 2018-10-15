@@ -19,6 +19,9 @@ trait TAutoGenerateIdentifier
     /**
      * 返回自增Id
      *
+     * @Primary
+     * @Identity
+     * @Column("column"="id","type"="integer",nullable=false)
      * @return int
      */
     public function getId():int

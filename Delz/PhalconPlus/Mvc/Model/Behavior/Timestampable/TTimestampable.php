@@ -12,6 +12,7 @@ trait TTimestampable
     /**
      * 创建时间
      *
+     * @Column("column"="created_at",type="datetime",nullable=false)
      * @var mixed
      */
     public $createdAt;
@@ -19,6 +20,7 @@ trait TTimestampable
     /**
      * 最新修改时间
      *
+     * @Column("column"="updated_at",type="datetime",nullable=true)
      * @var mixed
      */
     public $updatedAt;

@@ -16,6 +16,7 @@ use Delz\PhalconPlus\Security\Authentication\Token as BaseToken;
  * - Nonce      //随机数
  * - Timestamp  //unix时间戳
  * - Signature  //数据签名
+ * - IsMaster //是否主key，如不传，默认是true
  *
  * 服务端会给每个App-Id分配一个Secret，客户端发送这些数据的时候，服务端会进行验证。
  * 验证方法如下：
@@ -57,17 +58,28 @@ class Token extends BaseToken
     protected $signature;
 
     /**
+     * 是否root
+     *
+     * 主要跟acl有关，如果设置权限，这个设置为true，相当于root
+     *
+     * @var bool
+     */
+    protected $isMaster = true;
+
+    /**
      * @param string $appId
      * @param string $nonce
      * @param int $timestamp
      * @param string $signature
+     * @param bool $isMaster
      */
-    public function __construct(string $appId, string $nonce, int $timestamp, string $signature)
+    public function __construct(string $appId, string $nonce, int $timestamp, string $signature, bool $isMaster = true)
     {
         $this->appId = $appId;
         $this->nonce = $nonce;
         $this->timestamp = $timestamp;
         $this->signature = $signature;
+        $this->isMaster = $isMaster;
     }
 
     /**
@@ -108,6 +120,22 @@ class Token extends BaseToken
     public function getIdentifier():string
     {
         return $this->appId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMaster(): bool
+    {
+        return $this->isMaster;
+    }
+
+    /**
+     * @param bool $isMaster
+     */
+    public function setIsMaster(bool $isMaster)
+    {
+        $this->isMaster = $isMaster;
     }
 
 }

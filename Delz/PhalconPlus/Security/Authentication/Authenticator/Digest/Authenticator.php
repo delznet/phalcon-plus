@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Delz\PhalconPlus\Security\Authentication\Authenticator\Digest;
 
@@ -54,39 +54,49 @@ class Authenticator extends BaseAuthenticator
     /**
      * {@inheritdoc}
      */
-    protected function createToken():?IToken
+    protected function createToken(): ?IToken
     {
         $appId = $this->request->getHeader($this->getHeaderKey('App-Id'));
         $nonce = $this->request->getHeader($this->getHeaderKey('Nonce'));
         $timestamp = (int)$this->request->getHeader($this->getHeaderKey('Timestamp'));
         $signature = $this->request->getHeader($this->getHeaderKey('Signature'));
+
         if (!$appId || !$timestamp || !$nonce || !$signature) {
             return null;
         }
 
-        if (abs($timestamp - time()) > 600) {
+        if (abs($timestamp - time()) > 10) {
             return null;
         }
 
-        return new DigestToken($appId, $nonce, $timestamp, $signature);
+        $isMaster = $this->request->getHeader($this->getHeaderKey('IsMaster'));
+        $isMaster = ($isMaster === 0) ? false : true;
+
+        return new DigestToken($appId, $nonce, $timestamp, $signature, $isMaster);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function checkCredentials(IToken $token, IUser $user):bool
+    protected function checkCredentials(IToken $token, IUser $user): bool
     {
-        if(!$user instanceof IAppSecretUser) {
+        if (!$user instanceof IAppSecretUser) {
             throw  new UnsupportedUserException(
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );
         }
-        if(!$token instanceof DigestToken) {
+        if (!$token instanceof DigestToken) {
             throw new UnsupportedTokenException(
                 sprintf('Instances of "%s" are not supported.', get_class($token))
             );
         }
-        $signature = sha1($user->getAppSecret() . $token->getNonce() . $token->getTimestamp());
+
+        if ($token->isMaster()) {
+            $signature = sha1($user->getAppMasterSecret() . $token->getNonce() . $token->getTimestamp());
+        } else {
+            $signature = sha1($user->getAppSecret() . $token->getNonce() . $token->getTimestamp());
+        }
+
 
         return $signature === $token->getSignature();
     }
@@ -97,7 +107,7 @@ class Authenticator extends BaseAuthenticator
      * @param string $key
      * @return string
      */
-    private function getHeaderKey(string $key):string
+    private function getHeaderKey(string $key): string
     {
         return $this->prefix . $key;
     }

@@ -17,4 +17,11 @@ interface IAppSecretUser
      * @return string
      */
     public function getAppSecret():string;
+
+    /**
+     * 获取app master secret
+     *
+     * @return string
+     */
+    public function getAppMasterSecret():string;
 }

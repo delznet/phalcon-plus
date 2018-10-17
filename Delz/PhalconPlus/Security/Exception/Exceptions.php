@@ -17,6 +17,7 @@ class Exceptions
     const AUTHENTICATOR_NOT_SET = 100;
     const UNSUPPORTED_TOKEN = 101;
     const UNSUPPORTED_USER = 102;
+    const AUTHENTICATORS_NOT_FOUND = 103;
 
 
     /*******************************************************

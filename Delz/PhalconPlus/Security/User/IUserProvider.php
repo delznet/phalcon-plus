@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Delz\PhalconPlus\Security\User;
 
@@ -25,5 +25,5 @@ interface IUserProvider
      * @param string $uniqueIdentifier 唯一标识区分
      * @return IUser|null
      */
-    public function find(string $uniqueIdentifier):IUser;
+    public function find(string $uniqueIdentifier): ?IUser;
 }

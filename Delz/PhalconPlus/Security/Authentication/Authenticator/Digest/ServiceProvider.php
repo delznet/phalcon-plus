@@ -39,7 +39,7 @@ class ServiceProvider extends Provider
                 }
                 //此处如果无法获取，会有异常
                 $userProvider = $self->di->get($userProviderName);
-                $tokenStorageName = $config->get('security.digest.tokenStorage');
+                $tokenStorageName = $config->get('security.tokenStorage');
                 if (!$tokenStorageName) {
                     $tokenStorageName = 'securityTokenStorage';
                 }

@@ -5,13 +5,11 @@ declare(strict_types = 1);
 namespace Delz\PhalconPlus\Security\Authentication\Authenticator\WhiteList;
 
 /**
- * 白名单内存管理器
- *
- * 将白名单放在内存中
+ * 白名单管理器
  *
  * @package Delz\PhalconPlus\Security\Authentication\Authenticator\WhiteList
  */
-class MemoryManager implements IManager
+class Manager implements IManager
 {
     /**
      * 白名单

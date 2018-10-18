@@ -1,9 +1,10 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Delz\PhalconPlus\Security\Authentication\Authenticator\WhiteList;
 
+use Delz\PhalconPlus\Security\Authentication\ITokenStorage;
 use Delz\PhalconPlus\ServiceProvider\Provider;
 use Delz\PhalconPlus\Config\IConfig;
 
@@ -32,11 +33,29 @@ class ServiceProvider extends Provider
             function () use ($self) {
                 /** @var IConfig $config */
                 $config = $self->di->getShared('config');
-                $managerName = $config->get('security.whiteList.manager');
-                if (!$managerName) {
-                    throw new \RuntimeException('parameter: "security.whiteList.manager" is not set.');
+                $providerName = $config->get('security.whiteList.provider');
+                if (!$providerName) {
+                    throw new \RuntimeException('parameter: "security.whiteList.provider" is not set.');
                 }
-                $manager = $self->di->get($managerName);
+                /** @var IWhiteListProvider $provider */
+                $provider = $self->di->get($providerName);
+                if (!$provider instanceof IWhiteListProvider) {
+                    throw new \RuntimeException(
+                        sprintf('%s must be an instance of Delz\PhalconPlus\Security\Authentication\Authenticator\WhiteList\IWhiteListProvider', get_class($provider))
+                    );
+                }
+                $tokenStorageName = $config->get('security.tokenStorage');
+                if (!$tokenStorageName) {
+                    $tokenStorageName = 'securityTokenStorage';
+                }
+                /** @var ITokenStorage $tokenStorage */
+                $tokenStorage = $self->di->get($tokenStorageName);
+                if (!$tokenStorage instanceof ITokenStorage) {
+                    throw new \RuntimeException(
+                        sprintf('%s must be an instance of Delz\PhalconPlus\Security\Authentication\ITokenStorage', get_class($tokenStorage))
+                    );
+                }
+                $manager = new Manager($provider->getList($tokenStorage->getToken()));
                 return new Authenticator($manager);
             }
         );

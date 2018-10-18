@@ -37,6 +37,13 @@ class Authenticator extends BaseAuthenticator
     protected $prefix = 'Dz-';
 
     /**
+     * 签名有效时间，单位秒
+     *
+     * @var int
+     */
+    protected $lifetime = 30;
+
+    /**
      * @param RequestInterface $request
      * @param string $prefix
      * @param IUserProvider $userProvider
@@ -48,6 +55,16 @@ class Authenticator extends BaseAuthenticator
         $this->request = $request;
         $this->prefix = $prefix ? $prefix : $this->prefix;
         parent::__construct($userProvider, $tokenStorage, $eventManager);
+    }
+
+    /**
+     * 设置lifetime
+     *
+     * @param int $lifetime
+     */
+    public function setLifeTime(int $lifetime)
+    {
+        $this->lifetime = $lifetime;
     }
 
 
@@ -65,7 +82,7 @@ class Authenticator extends BaseAuthenticator
             return null;
         }
 
-        if (abs($timestamp - time()) > 10) {
+        if (abs($timestamp - time()) > $this->lifetime) {
             return null;
         }
 

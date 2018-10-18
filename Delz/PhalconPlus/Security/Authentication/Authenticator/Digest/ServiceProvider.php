@@ -48,13 +48,21 @@ class ServiceProvider extends Provider
                 $request = $self->di->getShared('request');
                 $eventsManager = $self->di->getShared('eventsManager');
 
-                return new DigestAuthenticator(
+                $authenticator = new DigestAuthenticator(
                     $request,
                     $prefix,
                     $userProvider,
                     $tokenStorage,
                     $eventsManager
                 );
+
+                $lifetime = $config->get('security.digest.lifetime');
+
+                if($lifetime) {
+                    $authenticator->setLifeTime((int)$lifetime);
+                }
+
+                return $authenticator;
             }
         );
     }

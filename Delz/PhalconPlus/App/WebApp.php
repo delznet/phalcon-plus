@@ -6,9 +6,10 @@ namespace Delz\PhalconPlus\App;
 
 use Delz\PhalconPlus\Events;
 use Delz\PhalconPlus\Exception\AppIdNullException;
-use Delz\PhalconPlus\Mvc\ApiResult;
+use Delz\PhalconPlus\Api\Response as ApiResponse;
 use Delz\PhalconPlus\Mvc\Controller\JsonController;
-use Phalcon\Mvc\DispatcherInterface;
+use Phalcon\Http\Response;
+use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Application;
 
 /**
@@ -53,8 +54,9 @@ class WebApp extends App
         $ex = null;
         $response = null;
         try {
+            /** @var Response|null $response */
             $response = $this->getApplication()->handle();
-            /** @var DispatcherInterface $dispatcher */
+            /** @var Dispatcher $dispatcher */
             $dispatcher = $this->di->get('dispatcher');
             $activeController = $dispatcher->getActiveController();
             $controllerClass = $dispatcher->getControllerClass();
@@ -62,7 +64,7 @@ class WebApp extends App
             if ($parentClass == 'Delz\PhalconPlus\Mvc\Controller\JsonController'
                 || ($activeController && $activeController instanceof JsonController)
             ) {
-                $apiResult = new ApiResult();
+                $apiResult = new ApiResponse();
                 $apiResult->setMsg('OK');
                 $apiResult->setData($dispatcher->getReturnedValue());
                 $response->setHeader('Access-Control-Allow-Origin', '*');

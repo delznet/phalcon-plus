@@ -1,15 +1,15 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Delz\PhalconPlus\Mvc;
+namespace Delz\PhalconPlus\Api;
 
 /**
- * api接口显示json
+ * 接口返回结构
  *
- * @package Delz\PhalconPlus\Mvc
+ * @package Delz\PhalconPlus\Api
  */
-class ApiResult implements \JsonSerializable
+class Response implements IResponse
 {
     /**
      * 返回状态码，其中：0成功，其它为错误
@@ -39,7 +39,7 @@ class ApiResult implements \JsonSerializable
     /**
      * @return int
      */
-    public function getRet():int
+    public function getRet(): int
     {
         return $this->ret;
     }
@@ -71,7 +71,7 @@ class ApiResult implements \JsonSerializable
     /**
      * @return string
      */
-    public function getMsg():string
+    public function getMsg(): string
     {
         return $this->msg;
     }

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Delz\PhalconPlus\Mvc\Model\Behavior\Sequence;
 
 /**
- * Interface ISubjectRepository
+ * Interface ISequenceRepository
  * @package Delz\PhalconPlus\Mvc\Model\Behavior\Sequence
  */
-interface ISubjectRepository
+interface ISequenceRepository
 {
     /**
      * @param string $number

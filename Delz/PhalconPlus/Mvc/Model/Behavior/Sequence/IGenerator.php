@@ -14,5 +14,5 @@ interface IGenerator
      * @param ISequenceSubject $subject
      * @return string
      */
-    public function generate(ISequenceSubject $subject);
+    public function generate(ISequenceSubject $subject):string;
 }

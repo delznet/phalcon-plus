@@ -94,7 +94,11 @@ class Response implements IResponse
             'msg' => $this->msg,
         ];
         if ($this->ret == 0 && $this->data) {
-            $data['data'] = $this->data;
+            if (is_array($this->data) && !empty($this->data)) {
+                $data['data'] = $this->data;
+            } elseif (null !== $this->data) {
+                $data['data'] = $this->data;
+            }
         }
         return $data;
     }

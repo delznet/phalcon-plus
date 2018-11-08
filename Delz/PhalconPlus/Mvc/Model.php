@@ -14,22 +14,14 @@ use Phalcon\Mvc\Model as PhalconModel;
 class Model extends PhalconModel
 {
     /**
-     * 表名
+     * 将setSource设为public
      *
-     * @var string
+     * 可以让外部事件修改表名
+     *
+     * @param string $source
      */
-    protected $tableName;
-
-    /**
-     * 初始化一些东西
-     */
-    public function initialize()
+    public function setSource($source)
     {
-        //如果设置了tableName，将tableName设置为表名
-        if($this->tableName) {
-            $this->setSource($this->tableName);
-        }
+        parent::setSource($source);
     }
-
-
 }

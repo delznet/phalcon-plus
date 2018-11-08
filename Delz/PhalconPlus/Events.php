@@ -150,6 +150,11 @@ final class Events
      */
     const DB_COMMIT_TRANSACTION = 'db:commitTransaction';
 
+    /**
+     * model初始化后事件
+     */
+    const MODELS_MANAGER_AFTER_INITIALIZE = 'modelsManager:afterInitialize';
+
     private function __construct()
     {
     }

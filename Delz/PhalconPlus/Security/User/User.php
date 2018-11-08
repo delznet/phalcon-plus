@@ -1,45 +1,50 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Delz\PhalconPlus\Security\User;
 
+use Delz\PhalconPlus\Mvc\Model\Common as Model;
+
 /**
- * 用户抽象类
+ * 用户基础类
  *
  * @package Delz\PhalconPlus\Security\User
  */
-abstract class User implements IUser
+class User extends Model implements IUser
 {
-    /**
-     * 角色
-     *
-     * @var array
-     */
-    protected $roles = [];
-
-    /**
-     * 用户是否激活
-     *
-     * @var bool
-     */
-    protected $enabled = false;
+    use TCredentialsHolder;
 
     /**
      * {@inheritdoc}
      */
-    public function getRoles():array
+    public function getRoles(): array
     {
-        return $this->roles;
+        return [];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isEnabled():bool
+    public function isEnabled(): bool
     {
-        return $this->enabled;
+        return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function isLocked(): bool
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isExpired(): bool
+    {
+        return false;
+    }
 
 }

@@ -11,7 +11,7 @@ use Phalcon\Mvc\Model as PhalconModel;
  *
  * @package Delz\PhalconPlus\Mvc
  */
-class Model extends PhalconModel
+abstract class Model extends PhalconModel
 {
     /**
      * 将setSource设为public
@@ -24,4 +24,13 @@ class Model extends PhalconModel
     {
         parent::setSource($source);
     }
+
+    /**
+     * 获取对象主键
+     *
+     * @return mixed
+     */
+    abstract function getId();
+
+
 }

@@ -17,7 +17,7 @@ use Delz\PhalconPlus\Mvc\Model\Behavior\Timestampable\TTimestampable;
  *
  * @package Delz\PhalconPlus\Mvc\Model
  */
-class Common extends Model implements IAutoGenerateIdentifier, ITimestampable
+class Common extends Model implements ITimestampable
 {
     use TAutoGenerateIdentifier, TTimestampable;
 }

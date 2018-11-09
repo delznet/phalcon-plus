@@ -11,13 +11,8 @@ namespace Delz\PhalconPlus\Security\User;
  *
  * @package Delz\PhalconPlus\Security\User
  */
-interface IUserAuth
+interface IUserAuth extends IUserAware
 {
-    /**
-     * @return IUser
-     */
-    public function getUser(): ?IUser;
-
     /**
      * 获取唯一id
      *

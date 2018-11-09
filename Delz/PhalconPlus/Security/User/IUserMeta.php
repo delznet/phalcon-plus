@@ -8,13 +8,8 @@ namespace Delz\PhalconPlus\Security\User;
  * Interface IUserMeta
  * @package Delz\PhalconPlus\Security\User
  */
-interface IUserMeta
+interface IUserMeta extends IUserAware
 {
-    /**
-     * @return mixed
-     */
-    public function getUser();
-
     /**
      * @return string
      */

@@ -25,5 +25,5 @@ interface IUserAuth extends IUserAware
      *
      * @return string
      */
-    public function getIdentifierType(): string;
+    public function getIdentityType(): string;
 }

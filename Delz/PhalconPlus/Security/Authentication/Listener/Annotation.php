@@ -24,12 +24,11 @@ class Annotation extends EventListener implements IAuthenticationListener
     /**
      * {@inheritdoc}
      */
-    public function beforeDispatch(Event $event, Dispatcher $dispatcher)
+    public function beforeExecuteRoute(Event $event, Dispatcher $dispatcher)
     {
         /** @var AnnotationsAdapterInterface $annotationService */
         $annotationService = $this->di->get('annotations');
-        $reflector = $annotationService->get($dispatcher->getControllerClass());
-        $annotations = $reflector->getClassAnnotations();
+        $annotations = $annotationService->getMethod($dispatcher->getControllerClass(), $dispatcher->getActiveMethod());
         if ($annotations && $annotations->has('Private')) {
             /** @var BaseAnnotation $annotation */
             $annotation = $annotations->get('Private');

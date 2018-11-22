@@ -8,7 +8,7 @@ use Delz\PhalconPlus\Exception\BadRequestException;
  *
  * @package Delz\PhalconPlus\Security\Exception
  */
-class TokenNotCreatedException extends BadRequestException implements IAuthenticationException
+class TokenNotCreatedException extends AuthenticationException
 {
     public function __construct($message = 'Token not created.', $code = Exceptions::TOKEN_NOT_CREATED)
     {

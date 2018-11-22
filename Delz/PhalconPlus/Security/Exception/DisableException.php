@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace Delz\PhalconPlus\Security\Exception;
 
-use Delz\PhalconPlus\Exception\BadRequestException;
-
 /**
  * 用户没有激活异常
  *
@@ -13,7 +11,7 @@ use Delz\PhalconPlus\Exception\BadRequestException;
  *
  * @package Delz\PhalconPlus\Security\Exception
  */
-class DisableException extends BadRequestException implements IAuthenticationException
+class DisableException extends AuthenticationException
 {
     public function __construct($message = 'User is disabled', $code = Exceptions::USER_DISABLE)
     {

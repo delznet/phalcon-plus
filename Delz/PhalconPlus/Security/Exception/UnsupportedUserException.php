@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace Delz\PhalconPlus\Security\Exception;
 
-use Delz\PhalconPlus\Exception\InternalServerErrorException;
-
 /**
  * 用户对象不符合异常
  *
@@ -14,7 +12,7 @@ use Delz\PhalconPlus\Exception\InternalServerErrorException;
  *
  * @package Delz\PhalconPlus\Security\Exception
  */
-class UnsupportedUserException extends InternalServerErrorException implements IAuthenticationException
+class UnsupportedUserException extends AuthenticationException
 {
     public function __construct($message = 'Unsupported User', $code = Exceptions::UNSUPPORTED_USER)
     {

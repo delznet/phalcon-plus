@@ -20,7 +20,8 @@ interface IAuthenticator
      * 如果认证失败，抛出AuthenticationException异常
      *
      * @return bool
-     * @throws AuthenticationException
+     * @throws AuthenticationException 认证失败抛出异常
+     * @throws \RuntimeException 程序配置错误的异常
      */
     public function handle();
 

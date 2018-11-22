@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Delz\PhalconPlus\Security\Authentication;
 
@@ -108,7 +108,7 @@ abstract class Authenticator implements IAuthenticator
      *
      * @return IToken|null
      */
-    abstract protected function createToken():?IToken;
+    abstract protected function createToken(): ?IToken;
 
     /**
      * 检查鉴权信息是否正确
@@ -119,7 +119,7 @@ abstract class Authenticator implements IAuthenticator
      * @param IUser $user
      * @return bool
      */
-    abstract protected function checkCredentials(IToken $token, IUser $user):bool;
+    abstract protected function checkCredentials(IToken $token, IUser $user): bool;
 
     /**
      * 根据token获取用户信息
@@ -127,7 +127,7 @@ abstract class Authenticator implements IAuthenticator
      * @param IToken $token
      * @return IUser|null
      */
-    protected function getUser(IToken $token):?IUser
+    protected function getUser(IToken $token): ?IUser
     {
         return $this->getUserProvider()->find($token->getIdentifier());
     }

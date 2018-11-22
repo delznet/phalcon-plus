@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Delz\PhalconPlus\Security\Authentication\Authenticator\Digest;
 
@@ -58,7 +58,7 @@ class ServiceProvider extends Provider
 
                 $lifetime = $config->get('security.digest.lifetime');
 
-                if($lifetime) {
+                if ($lifetime) {
                     $authenticator->setLifeTime((int)$lifetime);
                 }
 

@@ -18,7 +18,7 @@ class TokenStorageServiceProvider extends Provider
      *
      * @var string
      */
-    protected $serviceName = 'securityTokenStorage';
+    //protected $serviceName = 'securityTokenStorage';
 
     /**
      * {@inheritdoc}
